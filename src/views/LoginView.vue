@@ -1,10 +1,12 @@
 <template>
   <div class="loginContainer">
       <div
-        class="container form-width alert alert-danger margin-bottom-30 displaynone"
-        id="errorMessage"
+        class="container form-width margin-bottom-30 alert alert-danger alert-dismissible fade show"
+        role="alert"
+        v-if="errorMessage"
       >
         {{ errorMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <div class="container form-width" id="loginForm">
         <h1>Belépés</h1>
@@ -55,8 +57,7 @@
                 inputUsername: '',
                 inputEmail1: '',
                 inputPassword1: '',
-                errorMessage: `Nézd meg a postafiókod és igazold vissza az emailcímed!
-        ${<span>"Nem jött email?"</span>}`
+                errorMessage: null
             }
         },
         methods: {
@@ -64,27 +65,24 @@
                 const auth = getAuth(firebase);
                 signInWithEmailAndPassword(auth, this.inputEmail1, this.inputPassword1)
                 .then(() => {
+                  let user = auth.currentUser;
+                  if(user.displayName !== this.inputUsername) {
                     updateProfile(auth.currentUser, {
                       displayName: this.inputUsername
                     })
+                  }
                     this.$router.push("/home")
                 })
                 .catch((error) => {
-                    const errorMessage = document.querySelector('#errorMessage');
-                    errorMessage.classList.remove('displaynone');
-                    errorMessage.innerHTML = error.message;
+                    this.errorMessage = error.message;
                     console.log(error.message)
                 })
             },
             moveToRegister() {
-                this.$route.push("/register");
+                this.$router.push("/register");
             }
 
         }
     }
 
 </script>
-
-<style>
-
-</style>
