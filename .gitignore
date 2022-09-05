@@ -2,10 +2,12 @@
 node_modules
 /dist
 
-
 # local env files
 .env.local
 .env.*.local
+
+# Firebase config
+/src/composables/firebaseapikey.js
 
 # Log files
 npm-debug.log*
