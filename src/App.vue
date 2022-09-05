@@ -24,5 +24,5 @@
       <router-link to="/about">About</router-link> -->
     </nav>
   </header>
-  <router-view/>
+  <router-view />
 </template>
