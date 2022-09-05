@@ -1,17 +1,15 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <LoginForm />
+    Itt lesznek a könyvek!
   </div>
 </template>
 
 <script>
-import LoginForm from '@/components/LoginForm.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    LoginForm
+    
 }
 }
 </script>
