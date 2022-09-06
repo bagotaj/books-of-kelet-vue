@@ -57,15 +57,17 @@
   <script>
       import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
       import { firebase } from '../composables/firebaseapikey'
+      import { store } from '../composables/store.js'
   
       export default {
           data() {
               return {
-                  regUsername: '',
-                  regEmail1: '',
-                  regPassword1: '',
-                  repeatPassword1: '',
-                  errorMessage: null
+                store,
+                regUsername: '',
+                regEmail1: '',
+                regPassword1: '',
+                repeatPassword1: '',
+                errorMessage: null,
               }
           },
           methods: {
@@ -78,6 +80,7 @@
                           updateProfile(auth.currentUser, {
                             displayName: this.regUsername
                           })
+                          store.set();
                           this.$router.push("/home")
                       })
                       .catch((error) => {
