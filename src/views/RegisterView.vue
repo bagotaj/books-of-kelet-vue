@@ -91,7 +91,6 @@
               moveToLogin() {
                   this.$router.push("/");
               }
-  
           }
       }
   
