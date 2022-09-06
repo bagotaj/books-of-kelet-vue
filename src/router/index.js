@@ -46,9 +46,7 @@ router.beforeEach((to, from, next) => {
     let user = auth.currentUser;
 
     if (user) {
-      let loggedinContainer = document.querySelector('.loggedinContainer');
       const loggedinContainerContent = document.querySelector('.content');
-      loggedinContainer.classList.remove('displaynone');
       if (user.displayName !== null) {
         loggedinContainerContent.textContent = `Belépve: ${user.displayName}!`;
       }
