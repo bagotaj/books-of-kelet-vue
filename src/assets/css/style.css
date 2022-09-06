@@ -107,6 +107,10 @@ button:hover {
   flex-direction: row;
 }
 
+.form-check button {
+  margin-left: 10px;
+}
+
 .book-shelves {
   display: none;
   position: absolute;
