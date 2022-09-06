@@ -48,41 +48,42 @@
 </template>
 
 <script>
-    import { getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
-    import { firebase } from '../composables/firebaseapikey'
+  import { getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
+  import { firebase } from '../composables/firebaseapikey'
+  import { store } from '../composables/store.js'
 
     export default {
-        data() {
-            return {
-                inputUsername: '',
-                inputEmail1: '',
-                inputPassword1: '',
-                errorMessage: null
-            }
-        },
-        methods: {
-            login() {
-                const auth = getAuth(firebase);
-                signInWithEmailAndPassword(auth, this.inputEmail1, this.inputPassword1)
-                .then(() => {
+      data() {
+          return {
+              store,
+              inputUsername: "",
+              inputEmail1: "",
+              inputPassword1: "",
+              errorMessage: null,
+          };
+      },
+      methods: {
+          login() {
+              const auth = getAuth(firebase);
+              signInWithEmailAndPassword(auth, this.inputEmail1, this.inputPassword1)
+                  .then(() => {
                   let user = auth.currentUser;
-                  if(user.displayName !== this.inputUsername) {
-                    updateProfile(auth.currentUser, {
-                      displayName: this.inputUsername
-                    })
+                  if (user.displayName !== this.inputUsername) {
+                      updateProfile(auth.currentUser, {
+                          displayName: this.inputUsername
+                      });
                   }
-                    this.$router.push("/home")
-                })
-                .catch((error) => {
-                    this.errorMessage = error.message;
-                    console.log(error.message)
-                })
-            },
-            moveToRegister() {
-                this.$router.push("/register");
-            }
-
-        }
-    }
-
+                  store.set();
+                  this.$router.push("/home");
+              })
+                  .catch((error) => {
+                  this.errorMessage = error.message;
+                  console.log(error.message);
+              });
+          },
+          moveToRegister() {
+              this.$router.push("/register");
+          }
+      }
+}
 </script>
